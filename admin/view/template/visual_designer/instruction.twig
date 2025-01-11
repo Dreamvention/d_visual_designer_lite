@@ -1,0 +1,41 @@
+{{header}} {{column_left}}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="form-inline float-end">
+                <a href="{{cancel}}" data-bs-toggle="tooltip" title="{{button_cancel}}" class="btn btn-light"><i class="fa fa-reply"></i></a>
+            </div>
+            <h1>{{heading_title}} {{version}}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li class="breadcrumb-item"><a href="{{breadcrumb.href}}">{{breadcrumb.text}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-pencil"></i> {{text_instructions}}
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs">
+                    <li class="nav-link"><a href="{{href_setting}}" class="htab-item"><i class="fa fa-cog fa-fw"></i> {{text_setting}}</a></li>
+                    <li class="nav-link"><a href="{{href_templates}}" class="htab-item"><i class="fa fa-list"></i> {{text_templates}}</a></li>
+                    <li class="nav-link active"><a href="{{href_instruction}}" class="htab-item"><i class="fa fa-graduation-cap fa-fw"></i> {{text_instructions}}</a></li>
+                </ul>
+                <div class="instruction"></div>
+            </div>
+        </div>
+    </div>
+</div>
+ <script type="text/javascript">
+
+    var url = 'https://dreamvention.ee/visual-designer-instructions';
+
+    $.getJSON(url + '?format=json&callback=?', function(data) {
+        $('.instruction').html(data['description']);
+    });
+
+</script>
+{{ footer }}

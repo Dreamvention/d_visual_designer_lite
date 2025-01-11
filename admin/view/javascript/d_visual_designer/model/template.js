@@ -4,7 +4,7 @@
         var send_data = data.setting;
         send_data.setting = JSON.stringify(blocks)
         $.ajax({
-            url: 'index.php?route=extension/d_visual_designer/template/save&'+this.getState().config.url_token,
+            url: 'index.php?route=extension/visual_designer/visual_designer/template|save&'+this.getState().config.url_token,
             dataType: 'json',
             type: 'post',
             data: send_data,
@@ -23,7 +23,7 @@
             template_id: data.template_id
         }
         $.ajax({
-            url: 'index.php?route=extension/d_visual_designer/template/getTemplate&'+this.getState().config.url_token,
+            url: 'index.php?route=extension/visual_designer/visual_designer/template|getTemplate&'+this.getState().config.url_token,
             dataType: 'json',
             type: 'post',
             data: send_data,

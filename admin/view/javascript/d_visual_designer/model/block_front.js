@@ -15,7 +15,7 @@
         var blocks = this.getState().blocks
 
         $.ajax({
-            url: 'index.php?route=extension/d_visual_designer/designer/updateSetting&'+this.getState().config.url_token,
+            url: 'index.php?route=extension/visual_designer/visual_designer/designer|updateSetting&'+this.getState().config.url_token,
             type: 'post',
             dataType: 'json',
             data: send_data,
@@ -77,7 +77,7 @@
                 if(indexSize < _.size(data.size)){
                     blocks[data.designer_id][childBlocks[key].id].setting.global.size=data.size[indexSize]
                     result.update.push(childBlocks[key].id)
-                    
+
                 } else {
                     result.delete.push(childBlocks[key].id)
                     delete blocks[data.designer_id][childBlocks[key].id];
@@ -94,7 +94,7 @@
                 result.new.push(block_id)
             }
         }
-        
+
         this.dispatch('block/layout/update/success', {result: result, designer_id: data.designer_id})
     })
         /**

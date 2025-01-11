@@ -1,0 +1,16 @@
+<visual-designer id="{{designer_id}}"></visual-designer>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        request_body = {{ request_body|raw }};
+
+        $.post('index.php?route=extension/visual_designer/visual_designer/designer|get_content_data_via_ajax', request_body, function(json) {
+            d_visual_designer.initLocal(json.local);
+            d_visual_designer.initOptions(json.options);
+            d_visual_designer.initState(json.state);
+            riot.compile({{riot_tags|json_encode}}, function(){
+                riot.mount(document.getElementById('{{ designer_id }}'));
+            });
+        });
+    });
+</script>

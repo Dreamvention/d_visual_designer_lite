@@ -1,0 +1,15 @@
+{
+  "codename": "visual_designer",
+  "version": "1.0.22",
+  "name": "Visual Designer",
+  "description": "Amazing page builder that will blow your mind away. Try out the lite version and swith to pro when you are ready build professional landing pages.",
+  "author": "Dreamvention",
+  "link" : "https://dreamvention.ee/",
+  "dependencies": {
+	"dv_shortcode_reader_writer": ">=1.0.0",
+	"dv_simple_html_dom": ">=1.0.0",
+	"dv_elfinder": ">=1.0.0",
+	"dv_riot": ">=1.0.0",
+  "dv_opencart_patch": ">=1.0.0"
+  }
+}

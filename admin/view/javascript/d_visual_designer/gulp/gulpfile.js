@@ -76,8 +76,7 @@ gulp.task('iconsets', function () {
 gulp.task('copy-fonts', function () {
     return gulp.src([
         "../library/icon-fonts/fonts/*",
-        "../library/fontIconPicker/fonts/*",
-        "../library/summernote/fonts/*"
+        "../library/fontIconPicker/fonts/*"
     ])
         .pipe(gulp.dest(jsDest + 'fonts/'));
 });
@@ -95,9 +94,8 @@ gulp.task('scripts', function () {
         "../library/jquery-ui/jquery-ui.js",
         "../library/jquery.serializejson.js",
         "../library/underscore-min.js",
-        "../library/bootstrap-colorpicker/bootstrap-colorpicker.min.js",
+        "../library/jscolor.min.js",
         "../library/bootstrap-switch/bootstrap-switch.min.js",
-        "../library/summernote/summernote-cleaner.js",
         "../library/select2/select2.full.min.js",
         "../library/fontset.js",
         "../library/iconsets/*.js"
@@ -117,9 +115,7 @@ gulp.task('styles', function () {
         "../library/icon-fonts/octicons.scss",
         "../library/icon-fonts/typicons.scss",
         "../library/icon-fonts/weather-icons.scss",
-        "../library/bootstrap-colorpicker/bootstrap-colorpicker.min.css",
         "../library/bootstrap-switch/bootstrap-switch.min.css",
-        "../library/summernote/summernote.css",
         "../library/select2/select2-bootstrap.min.css",
         "../library/select2/select2.font.css",
         "../library/select2/select2.min.css",

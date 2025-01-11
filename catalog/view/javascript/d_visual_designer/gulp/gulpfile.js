@@ -41,7 +41,8 @@ gulp.task("basic-scripts", function () {
         "../library/chart/Chart.min.js",
         "../library/pie-chart.js",
         "../library/circle-progress.js",
-        "../library/owl-carousel/owl.carousel.min.js",
+		"../library/swiperjs/swiper-bundle.min.js",
+        //"../library/owl-carousel/owl.carousel.min.js",
         "../library/webfont.js",
         "../library/underscore-min.js",
         "../library/fastclone.js"
@@ -55,8 +56,8 @@ gulp.task("basic-styles", function () {
     return gulp.src([
         "../library/sharrre/style.css",
         "../library/magnific/magnific-popup.css",
-        "../library/owl-carousel/owl.carousel.scss",
-        "../library/owl-carousel/owl.transitions.scss",
+        "../library/swiperjs/swiper-bundle.min.css",
+        // "../library/owl-carousel/owl.transitions.scss",
         "../library/animate.css",
         "../library/icon-fonts/elusive-icons.scss",
         "../library/icon-fonts/fontawesome.scss",

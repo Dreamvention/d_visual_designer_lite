@@ -3,7 +3,7 @@
     this.subscribe('designer/update/blocks',function(data){
         var contents = this.getState().content
         $.ajax({
-            url: 'index.php?route=extension/d_visual_designer/designer/updateContent&'+this.getState().config.url_token,
+            url: 'index.php?route=extension/visual_designer/visual_designer/designer|updateContent&'+this.getState().config.url_token,
             dataType: 'json',
             type: 'post',
             data: {content: contents[data.designer_id]},
@@ -32,13 +32,13 @@
             setting: JSON.stringify(blocks)
         }
         $.ajax({
-            url: 'index.php?route=extension/d_visual_designer/designer/getContent&'+this.getState().config.url_token,
+            url: 'index.php?route=extension/visual_designer/visual_designer/designer|getContent&'+this.getState().config.url_token,
             dataType: 'json',
             type: 'post',
             data: send_data,
             context: this,
             success: function(json){
-                
+
                 if(json.success) {
                     content = this.getState().content
                     content[data.designer_id] = json.content

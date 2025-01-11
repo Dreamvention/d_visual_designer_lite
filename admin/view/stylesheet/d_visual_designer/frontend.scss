@@ -57,7 +57,7 @@ span.notify{
 .vd-navbar{
     &.left-bar{
         float:left;
-        
+
         border-radius: 3px;
         > a{
             margin-right:1px;
@@ -66,12 +66,12 @@ span.notify{
                 &:hover{
                     background-color:#f7cd32;
                 }
-            }    
+            }
         }
         .vd-dropdown{
             > a{
                 border-top-right-radius:3px;
-                
+
             }
             &:not(:hover) > a{
                 border-bottom-right-radius:3px;
@@ -84,7 +84,7 @@ span.notify{
                     }
                 }
             }
-            
+
         }
         .vd-btn{
             display: block;
@@ -92,15 +92,15 @@ span.notify{
             width:60px;
             height:60px;
             background-color: #308cd6;
-            
+
             float:left;
-            
+
             &:hover{
                 background-color: #56a6e6;
             }
         }
     }
-    
+
     &.right-bar{
         float:right;
         box-shadow: 0.707px 0.707px 3px 0 rgba(0, 0, 0, 0.2);
@@ -197,7 +197,7 @@ span.notify{
             list-style: none;
             visibility: hidden;
             transition: 1ms;
-            
+
         }
     }
     .vd-btn-add-block{
@@ -244,3 +244,4 @@ iframe{
 .alertify-notifier .ajs-message.ajs-warning {
     font-size: 17px;
 }
+.vd-radio-btn-group[data-bs-toggle="buttons"] input[type="radio"] { position: absolute; clip: rect(0, 0, 0, 0); pointer-events: none;}

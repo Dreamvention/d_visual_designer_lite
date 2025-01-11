@@ -1,0 +1,101 @@
+{{header}} {{column_left}}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="form-inline float-end">
+                <a href="{{add}}" data-bs-toggle="tooltip" title="{{button_add}}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+                <button type="button" data-bs-toggle="tooltip" title="{{button_delete}}" class="btn btn-danger" onclick="confirm('{{text_confirm}}') ? $('#form-template').submit() : false;"><i class="fa fa-trash-can"></i></button>
+                <a href="{{cancel}}" data-bs-toggle="tooltip" title="{{button_cancel}}" class="btn btn-light"><i class="fa fa-reply"></i></a>
+            </div>
+            <h1>{{heading_title}} {{version}}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li class="breadcrumb-item"><a href="{{breadcrumb.href}}">{{breadcrumb.text}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error.warning %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{error.warning}}
+                <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+            </div>
+        {% endif %}
+        {% if success %}
+            <div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{success}}
+                <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+            </div>
+        {% endif %}
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-pencil"></i> {{text_list_template}}
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs">
+                    <li class="nav-link"><a href="{{href_setting}}" class="htab-item"><i class="fa fa-cog fa-fw"></i> {{text_setting}}</a></li>
+                    <li class="nav-link active"><a href="{{href_templates}}" class="htab-item"><i class="fa fa-list"></i> {{text_templates}}</a></li>
+                    <li class="nav-link"><a href="{{href_instruction}}" class="htab-item"><i class="fa fa-graduation-cap fa-fw"></i> {{text_instructions}}</a></li>
+                </ul>
+                <form action="{{delete}}" method="post" enctype="multipart/form-data" id="form-template">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td class="text-center" style="width:30px;"><input class="form-check-input"  type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                                    <td class="text-center col-sm-1">{{column_image}}</td>
+                                    <td class="text-center">
+                                        {% if sort == 'name' %}
+                                            <a href="{{sort_name}}" class="{{order|lower}}">{{column_name}}</a>
+                                        {% else %}
+                                            <a href="{{sort_name}}">{{column_name}}</a>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        {% if sort == 'sort_order' %}
+                                            <a href="{{sort_sort_order}}" class="{{order|lower}}">{{column_sort_order}}</a>
+                                        {% else %}
+                                            <a href="{{sort_sort_order}}">{{column_sort_order}}</a>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-end">{{column_action}}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if templates %}
+                                    {% for template in templates %}
+                                        <tr>
+                                            <td class="text-center">
+                                                {% if not template.config %}
+                                                    {% if template.template_id in selected %}
+                                                        <input class="form-check-input" type="checkbox" name="selected[]" value="{{template.template_id}}" checked="checked"/>
+                                                    {% else %}
+                                                        <input class="form-check-input" type="checkbox" name="selected[]" value="{{template.template_id}}"/>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center"><img style="width:40px;" class="img-thumbnail" src="{{template.image}}"/></td>
+                                            <td class="text-center">{{template.name}}</td>
+                                            <td class="text-center">{{template.sort_order}}</td>
+                                            <td class="text-end">
+                                               <a href="{{ template.edit }}" data-bs-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td class="text-center" colspan="5">{{text_no_results}}</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-sm-6 text-start">{{pagination}}</div>
+                    <div class="col-sm-6 text-end">{{results}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}

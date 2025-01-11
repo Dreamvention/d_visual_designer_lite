@@ -53,8 +53,6 @@
             this.updateState({blocks: blocks})
         }.bind(this)) 
         this.external_vd.subscribe('block/create/success', function(data) { 
-            var isParent = data.isParent
-            data.isParent = undefined
             var block_info = this.getStateExternal().blocks[data.designer_id][data.block_id]
             var block_config = _.find(this.getState().config.blocks, function(block){
                 return block.type == block_info.type
@@ -63,9 +61,7 @@
             blocks[data.designer_id][data.block_id] = JSON.parse(JSON.stringify(block_info))
             blocks[data.designer_id][data.block_id].setting.edit = block_config.setting_default.edit
             this.updateState({blocks: blocks})
-            if (!isParent) {
-                this.dispatch('block/create/success', data) 
-            }
+            this.dispatch('block/create/success', data) 
         }.bind(this)) 
         this.external_vd.subscribe('block/child/create', function(data){
             var blocks = this.getState().blocks

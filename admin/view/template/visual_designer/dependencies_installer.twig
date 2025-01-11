@@ -1,0 +1,187 @@
+{{header}} {{column_left}}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="form-inline float-end">
+                <a href="{{cancel}}" data-bs-toggle="tooltip" title="{{button_cancel}}" class="btn btn-light">
+                    <i class="fa fa-reply"></i>
+                </a>
+            </div>
+            <h1>{{heading_title}} {{version}}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                <li class="breadcrumb-item">
+                    <a href="{{breadcrumb.href}}">{{breadcrumb.text}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+
+                    <i class="fa fa-pencil"></i> {{text_edit}}
+            </div>
+            <div class="card-body">
+                <style>
+                    a#button-menu{
+                        -webkit-appearance: none!important;
+                    }
+                    .welcome {
+                        background: url('view/image/d_visual_designer/icons/icon_in_footer.svg');
+                        background-position: bottom;
+                        background-repeat: repeat-x;
+                        background-size: 70%;
+                        min-height: 1025px;
+                        padding-top: 50px;
+                        padding-bottom: 325px;
+                    }
+
+                    .welcome-into {
+                        text-align: center;
+                        max-width: 500px;
+                        margin: auto;
+                    }
+
+                    .welcome-into-logo {
+                        padding-bottom: 15px;
+                    }
+
+                    .welcome-into-heading {
+                        font-size: 30px;
+                        font-weight: bold;
+                        padding-bottom: 15px;
+                    }
+
+                    .welcome-into-text {
+                        font-size: 18px;
+                        padding-bottom: 30px;
+                    }
+
+                    .welcome-into-start {
+                        padding-bottom: 30px;
+                    }
+
+                    .welcome-features {
+                        padding: 30px;
+                    }
+
+                    .welcome-features-icon {
+                        padding: 20px;
+                        height: 130px;
+                        text-align: center;
+                    }
+
+                    .welcome-features-text {
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 16px;
+                    }
+
+                    .panel .panel-body {
+                        padding: 0px;
+                    }
+                </style>
+                <div class="welcome">
+                    <div class="welcome-into">
+                        <div class="welcome-into-logo">
+                            <img src="{{ constant('HTTP_CATALOG') }}extension/visual_designer/admin/view/image/d_visual_designer/icons/main_icon_vd.svg" />
+                        </div>
+                        <div class="welcome-into-heading">{{text_welcome_title}}</div>
+                        <div class="welcome-into-text">{{text_welcome_description}}</div>
+
+                        <label class="col-form-label">{{ entry_install_dependencies }}</label>
+                        <div style="justify-content: center;" class="row col-sm-12 mt-2">
+                          <div id="loading-bar" class="spinner-grow" style="width: 5rem; height: 5rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                          <div id="loading-text"></div>
+                        </div>
+                    </div>
+                    <div class="welcome-features">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="welcome-features-icon">
+                                    <img src="{{ constant('HTTP_CATALOG') }}extension/visual_designer/admin/view/image/d_visual_designer/icons/visual-editor.svg" />
+                                </div>
+                                <div class="welcome-features-text">{{text_welcome_visual_editor}}</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="welcome-features-icon">
+                                    <img src="{{ constant('HTTP_CATALOG') }}extension/visual_designer/admin/view/image/d_visual_designer/icons/50 _building_blocks.svg" />
+                                </div>
+                                <div class="welcome-features-text">{{text_welcome_building_blocks}}</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="welcome-features-icon">
+                                    <img src="{{ constant('HTTP_CATALOG') }}extension/visual_designer/admin/view/image/d_visual_designer/icons/mobile_ready.svg" />
+                                </div>
+                                <div class="welcome-features-text">{{text_welcome_mobile_ready}}</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="welcome-features-icon">
+                                    <img src="{{ constant('HTTP_CATALOG') }}extension/visual_designer/admin/view/image/d_visual_designer/icons/increase_sales.svg" />
+                                </div>
+                                <div class="welcome-features-text">{{text_welcome_increase_sales}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+$(document).ready(function() {
+  var dependencies = {{ non_installed }};
+
+  var next = 'index.php?route=extension/visual_designer/module/visual_designer|installDependencies&user_token={{ user_token }}&code=' + dependencies[0];
+
+  var step = 0;
+
+  var install = function () {
+      $.ajax({
+          url: next,
+          dataType: 'json',
+          success: function (json) {
+              if (json['error']) {
+                $('#loading-bar').addClass('bg-danger');
+                $('#loading-text').html('<div class="text-danger">' + json['error'] + '</div>');
+              }
+
+              if (json['success']) {
+                dependencies.shift();
+                if (!dependencies[0] && !json['dependencies']) {
+                  $('#loading-text').html('<div class="text-success">' + json['success'] + '</div>');
+                  location = '{{ location }}';
+                } else {
+                  if (json['dependencies']) {
+                    json['dependencies'].forEach(
+                      (dependency) => {
+                        dependencies.push(dependency);
+                      }
+                    );
+                  }
+                  step += 1;
+                  next = 'index.php?route=extension/visual_designer/module/visual_designer|installDependencies&user_token={{ user_token }}&code=' + dependencies[0];
+                  install();
+                }
+              }
+
+              if (json['next']) {
+                  next = json['next'];
+                  install();
+              }
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+          }
+      });
+  };
+
+  install();
+});
+</script>
+{{footer}}

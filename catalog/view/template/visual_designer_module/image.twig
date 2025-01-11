@@ -1,0 +1,12 @@
+<div class="vd-image-container vd-image-align-{{ setting.global.align }} {{id}} {{ setting.global.additional_css_class }}" >
+    <div class="vd-image-title">
+        <h2>{{ setting.global.title }}</h2>
+    </div>
+    <div class="vd-image-wrapper vd-image-size-{{ setting.global.size }}">
+        <div class="vd-image {{ setting.global.style?'vd-image-style'~setting.global.style }}">
+            <a>
+                <img src="{{ setting.user.thumb }}" alt="{{ setting.global.image_alt }}" title="{{ setting.global.image_title }}"/>
+            </a>
+        </div>
+    </div>
+</div>

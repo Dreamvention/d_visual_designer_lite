@@ -45,13 +45,13 @@
         }
 
         this.removeBlock(data.designer_id, data.block_id)
-        
+
         this.dispatch('block/remove/success')
         $('body').trigger('remove_block_success', {'title': block_config.title});
     }.bind(this));
 
     this.removeBlock = function(designer_id, block_id) {
-        
+
         var blocks = this.getState().blocks
 
         blocks[designer_id] = _.pick(blocks[designer_id], function(value, key, object){
@@ -59,7 +59,7 @@
         })
 
         this.updateState({blocks: blocks})
-        
+
         var childBlocks = this.getBlocks(designer_id, block_id)
         if(_.size(childBlocks) > 0) {
             for(var key in childBlocks){
@@ -94,15 +94,15 @@
                 var block_config_parent = _.find(this.getState().config.blocks, function(block){
                     return block.type == blocks[data.designer_id][data.start_under_id].type
                 })
-    
+
                 var childBlocks = this.getBlocks(data.designer_id, data.start_under_id)
-    
+
                 if (block_config_parent.setting.child && _.size(childBlocks) == 0){
                     data.block_id = data.start_under_id
                     this.removeBlock(data.designer_id, data.block_id)
                 }
             }
-    
+
         }
         if(data.success){
             data.success()
@@ -127,7 +127,7 @@
             for (var key in childBlocks) {
                 if(indexSize < _.size(data.size)){
                     blocks[data.designer_id][childBlocks[key].id].setting.global.size=data.size[indexSize]
-                    
+
                 } else {
                     delete blocks[data.designer_id][childBlocks[key].id];
                 }
@@ -142,7 +142,7 @@
                 this.newBlock(data.designer_id, block_config.setting.child, data.block_id, {size:data.size[i]});
             }
         }
-        
+
         this.dispatch('block/layout/update/success')
     })
     /**
@@ -157,7 +157,7 @@
         var blocks = this.getState().blocks
 
         $.ajax({
-            url: 'index.php?route=extension/d_visual_designer/designer/updateSetting&'+this.getState().config.url_token,
+            url: 'index.php?route=extension/visual_designer/visual_designer/designer|updateSetting&'+this.getState().config.url_token,
             type: 'post',
             dataType: 'json',
             data: send_data,

@@ -560,3 +560,8 @@ span.module_name {
         // background: #fff;
     }
 }
+.vd-radio-btn-group[data-bs-toggle="buttons"] input[type="radio"] {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+	pointer-events: none;
+}

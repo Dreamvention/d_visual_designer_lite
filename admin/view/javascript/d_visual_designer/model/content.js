@@ -19,7 +19,7 @@
             }
 
             $.ajax({
-                url: 'index.php?route=extension/d_visual_designer/designer/loadSetting&'+this.getState().config.url_token,
+                url: 'index.php?route=extension/visual_designer/visual_designer/designer|loadSetting&'+this.getState().config.url_token,
                 data: {setting: JSON.stringify(send_data)},
                 type: 'post',
                 dataType: 'json',
@@ -58,7 +58,7 @@
                         setTimeout(function(){
                             this.dispatch('content/mode/update', {designer_id: json.designer_id, 'mode': 'designer'})
                         }.bind(this), 500)
-                       
+
                    }
                 },
                 complete: function(){
